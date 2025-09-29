@@ -1,0 +1,15 @@
+{
+  "navbar": {
+    "home": "Home",
+    "menu": "Menu",
+    "contact": "Contact"
+  },
+  "carta": {
+    "title": "Our Menu 🍽️",
+    "price": "€",
+    "search": "Search dishes..."
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  }
+}
