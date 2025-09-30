@@ -22,6 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-8+r8y2dpr)9*x(*j(0tm_+mps4%z*mffa&_^2w5i_!38txzu$u'
 
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False  # mantenemos controlado
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -51,6 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -136,9 +140,6 @@ STATIC_URL = 'static/'
 # Archivos multimedia (fotos, etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# WhiteNoise Middleware: justo después de SecurityMiddleware
-MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
 # Usa almacenamiento comprimido para servir archivos de forma eficiente
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
