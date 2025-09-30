@@ -11,5 +11,44 @@
   },
   "footer": {
     "rights": "All rights reserved"
+  },
+  "about": {
+    "title": "About Us",
+    "paragraph1": "At El Punto Bar Restaurante, we celebrate authentic Peruvian cuisine with a modern twist. We are passionate about offering unforgettable gastronomic experiences in a cozy and sophisticated atmosphere.",
+    "paragraph2": "Whether you come with friends, as a couple, or with family, we welcome you with the best flavors of Peru and top-quality service."
+  },
+  "hero":{
+    "title": "Peruvian Flavors that Captivate",
+    "subtitle": "A place where Peruvian gastronomy blends with good vibes, music, and a unique experience.",
+    "button": "View Menu"
+  },
+   "contact": {
+    "title": "Contact Us 📞",
+    "description": "Book your table or place your order. We’re delighted to serve you at El Punto Bar!",
+    "address_label": "Address:",
+    "address": "Carrer de Mallorca, 107, L'Eixample, 08029 Barcelona",
+    "hours_label": "Opening Hours:",
+    "hours_weekdays": "Monday to Thursday: 12:00 PM – 12:30 AM",
+    "hours_weekend": "Friday to Sunday: 09:00 AM – 12:30 AM",
+    "phone_label": "Phone:",
+    "call_button": "Call Now",
+    "whatsapp_button": "WhatsApp",
+    "reviews": [
+      {
+        "name": "Pau Scalona",
+        "text": "DELICIOUS. The best ceviche and causa in Barcelona. Incredible sauces, super fresh fish, and great service. Very reasonable prices — worth every cent.",
+        "stars": 5
+      },
+      {
+        "name": "Josue A. Gonzales L.",
+        "text": "It’s my first time here and the service was great. I ate exactly what I wanted, how I wanted, haha… I totally recommend it! 🇵🇪👍🏻",
+        "stars": 5
+      },
+      {
+        "name": "Ibai Zabaleta",
+        "text": "Authentic Peruvian cuisine. Unbeatable daily menu, tasty traditional dishes, and friendly service. Highly recommended.",
+        "stars": 4
+      }
+    ]
   }
 }

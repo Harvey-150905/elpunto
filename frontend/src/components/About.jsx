@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export default function About() {
+  const { t } = useTranslation();
+
   return (
     <section
       id="sobre-nosotros"
@@ -11,16 +15,13 @@ export default function About() {
       />
 
       <div className="text-gray-300 md:w-1/2">
-        <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Sobre Nosotros</h2>
+        <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">
+          {t("about.title")}
+        </h2>
         <p className="mb-4">
-          En <strong>El Punto Bar Restaurante</strong> celebramos la auténtica
-          cocina peruana con un toque moderno. Nos apasiona ofrecer experiencias
-          gastronómicas inolvidables en un ambiente acogedor y sofisticado.
+          {t("about.paragraph1")}
         </p>
-        <p>
-          Ya sea para disfrutar con amigos, en pareja o familia, te esperamos con
-          los mejores sabores del Perú y una atención de primera.
-        </p>
+        <p>{t("about.paragraph2")}</p>
       </div>
     </section>
   );

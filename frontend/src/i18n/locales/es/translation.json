@@ -11,5 +11,46 @@
   },
   "footer": {
     "rights": "Todos los derechos reservados"
+  },
+  
+  "about": {
+    "title": "Sobre Nosotros",
+    "paragraph1": "En El Punto Bar Restaurante celebramos la auténtica cocina peruana con un toque moderno. Nos apasiona ofrecer experiencias gastronómicas inolvidables en un ambiente acogedor y sofisticado.",
+    "paragraph2": "Ya sea para disfrutar con amigos, en pareja o familia, te esperamos con los mejores sabores del Perú y una atención de primera."
+  },
+  "hero":{
+    "title": "Sabores Peruanos que Conquistan",
+    "subtitle": "Un espacio donde la gastronomía peruana se mezcla con la buena vibra, la música y una experiencia única.",
+    "button": "Ver Carta"
+  },
+  "contact": {
+    "title": "Contáctanos 📞",
+    "description": "Reserva tu mesa o haz tu pedido. ¡Estamos encantados de atenderte en El Punto Bar!",
+    "address_label": "Dirección:",
+    "address": "Carrer de Mallorca, 107, L'Eixample, 08029 Barcelona",
+    "hours_label": "Horario:",
+    "hours_weekdays": "Lunes a jueves: 12:00 – 00:30",
+    "hours_weekend": "Viernes a domingo: 09:00 – 00:30",
+    "phone_label": "Teléfono:",
+    "call_button": "Llamar ahora",
+    "whatsapp_button": "WhatsApp",
+    "reviews": [
+      {
+        "name": "Pau Scalona",
+        "text": "DELICIOSO. El mejor ceviche y causa de Barcelona. Increíbles salsas, el pescado súper fresco y muy buena atención. Los precios muy razonables, vale la pena cada centavo.",
+        "stars": 5
+      },
+      {
+        "name": "Josue A. Gonzales L.",
+        "text": "Es la primera vez que he venido al local y la atención súper bien, he comido como he querido y lo que he querido jeje... ¡Se los recomiendo! 🇵🇪👍🏻",
+        "stars": 5
+      },
+      {
+        "name": "Ibai Zabaleta",
+        "text": "Auténtico restaurante de cocina peruana. Menú del día inigualable, platos típicos sabrosos y trato amable. Muy recomendable.",
+        "stars": 4
+      }
+    ]
   }
 }
+

@@ -1,25 +1,10 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Contacto() {
-  const reviews = [
-    {
-      name: "Pau Scalona",
-      text: "DELICIOSO. El mejor ceviche y causa de Barcelona. Increíbles salsas, el pescado súper fresco y muy buena atención. Los precios muy razonables, vale la pena cada centavo.",
-      stars: 5,
-    },
-    {
-      name: "Josue A. Gonzales L.",
-      text: "Es la primera vez que he venido al local y la atención súper bien, he comido como he querido y lo que he querido jeje... ¡Se los recomiendo! 🇵🇪👍🏻",
-      stars: 5,
-    },
-    {
-      name: "Ibai Zabaleta",
-      text: "Auténtico restaurante de cocina peruana. Menú del día inigualable, platos típicos sabrosos y trato amable. Muy recomendable.",
-      stars: 4,
-    },
-  ];
-
+  const { t } = useTranslation();
+  const reviews = t("contact.reviews", { returnObjects: true });
   const [index, setIndex] = useState(-1); // -1 = mapa visible
 
   const handleNext = () => {
@@ -40,26 +25,29 @@ export default function Contacto() {
         {/* 📞 Columna Izquierda */}
         <div>
           <h2 className="text-4xl font-bold text-[#D4AF37] mb-6 text-center md:text-left">
-            Contáctanos 📞
+            {t("contact.title")}
           </h2>
 
           <p className="text-gray-300 mb-8 text-center md:text-left">
-            Reserva tu mesa o haz tu pedido. ¡Estamos encantados de atenderte en{" "}
-            <span className="text-[#D4AF37] font-semibold">El Punto Bar</span>!
+            {t("contact.description")}
           </p>
 
           <div className="space-y-4 text-gray-200">
             <p>
               📍{" "}
-              <span className="text-[#D4AF37] font-semibold">Dirección:</span>{" "}
-              Carrer de Mallorca, 107, L&apos;Eixample, 08029 Barcelona
+              <span className="text-[#D4AF37] font-semibold">
+                {t("contact.address_label")}
+              </span>{" "}
+              {t("contact.address")}
             </p>
             <p>
               ⏰{" "}
-              <span className="text-[#D4AF37] font-semibold">Horario:</span>{" "}
+              <span className="text-[#D4AF37] font-semibold">
+                {t("contact.hours_label")}
+              </span>{" "}
               <br />
-              Lunes a jueves: 12:00 – 00:30 <br />
-              Viernes a domingo: 09:00 – 00:30
+              {t("contact.hours_weekdays")} <br />
+              {t("contact.hours_weekend")}
             </p>
             <p>
               📞{" "}
@@ -77,7 +65,7 @@ export default function Contacto() {
               href="tel:+34647037583"
               className="bg-[#D4AF37] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#c6a233] transition"
             >
-              Llamar ahora
+              {t("contact.call_button")}
             </a>
             <a
               href="https://wa.me/34647037583"
@@ -85,12 +73,12 @@ export default function Contacto() {
               rel="noopener noreferrer"
               className="bg-[#25D366] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#1da851] transition"
             >
-              WhatsApp
+              {t("contact.whatsapp_button")}
             </a>
           </div>
         </div>
 
-        {/* 🗺️ Columna Derecha: Mapa + Reseñas con deslizamiento */}
+        {/* 🗺️ Columna Derecha: Mapa + Reseñas */}
         <div className="relative rounded-xl overflow-hidden shadow-lg border border-[#D4AF37]/20 h-[400px]">
           <div
             className="flex h-full w-full transition-transform duration-700 ease-in-out"
@@ -131,7 +119,7 @@ export default function Contacto() {
             </div>
           </div>
 
-          {/* 🔘 Flechas de control */}
+          {/* 🔘 Flechas */}
           <button
             onClick={handlePrev}
             className="absolute top-1/2 -translate-y-1/2 left-3 bg-black/50 p-2 rounded-full hover:bg-[#D4AF37]/40 transition"
