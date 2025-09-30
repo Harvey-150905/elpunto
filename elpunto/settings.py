@@ -143,9 +143,7 @@ MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 # Usa almacenamiento comprimido para servir archivos de forma eficiente
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-CORS_ALLOWED_ORIGINS += [
-    "https://elpunto.vercel.app",  # cámbialo cuando subas el frontend
-]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -156,6 +154,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    "https://elpunto.vercel.app",  # cámbialo cuando subas el frontend
 ]
 
 # DRF básico
