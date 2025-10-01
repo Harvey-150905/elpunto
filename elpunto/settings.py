@@ -12,24 +12,24 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # -----------------------------
-# 🔐 SECRET KEY
+# SECRET KEY
 # -----------------------------
 SECRET_KEY = os.environ.get(
     "SECRET_KEY", "django-insecure-8+r8y2dpr)9*x(*j(0tm_+mps4%z*mffa&_^2w5i_!38txzu$u"
 )
 
 # -----------------------------
-# ⚙️ DEBUG MODE
+# DEBUG MODE
 # -----------------------------
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
 # -----------------------------
-# 🌐 HOSTS
+# HOSTS
 # -----------------------------
 ALLOWED_HOSTS = ["*"]
 
 # -----------------------------
-# 🤝 CORS CONFIG
+# CORS CONFIG
 # -----------------------------
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False
@@ -42,7 +42,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # -----------------------------
-# 🧩 APPS
+#  APPS
 # -----------------------------
 INSTALLED_APPS = [
     "jazzmin",
@@ -65,7 +65,7 @@ INSTALLED_APPS = [
 ]
 
 # -----------------------------
-# ⚙️ MIDDLEWARE
+# MIDDLEWARE
 # -----------------------------
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -83,7 +83,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = "elpunto.urls"
 
 # -----------------------------
-# 🧱 TEMPLATES
+# TEMPLATES
 # -----------------------------
 TEMPLATES = [
     {
@@ -103,7 +103,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "elpunto.wsgi.application"
 
 # -----------------------------
-# 🗄️ DATABASES
+#  DATABASES
 # -----------------------------
 if os.environ.get("RENDER", "").lower() == "true":
     # 🔹 Render usa PostgreSQL (DATABASE_URL viene del panel Render)
@@ -120,7 +120,7 @@ else:
     }
 
 # -----------------------------
-# 🔑 AUTH
+#AUTH
 # -----------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -130,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # -----------------------------
-# 🌍 I18N
+#  I18N
 # -----------------------------
 LANGUAGE_CODE = "es"
 
@@ -145,14 +145,14 @@ USE_I18N = True
 USE_TZ = True
 
 # -----------------------------
-# 🧱 STATIC FILES
+#  STATIC FILES
 # -----------------------------
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # -----------------------------
-# 🖼️ MEDIA FILES (Cloudinary)
+#  MEDIA FILES (Cloudinary)
 # -----------------------------
 if os.environ.get("RENDER") == "true":
     # Render → Cloudinary (no guarda local)
@@ -168,14 +168,14 @@ else:
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # -----------------------------
-# ⚙️ DRF
+#  DRF
 # -----------------------------
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
 }
 
 # -----------------------------
-# 🎨 JAZZMIN
+#  JAZZMIN
 # -----------------------------
 JAZZMIN_SETTINGS = {
     "site_title": "El Punto Bar",
@@ -189,6 +189,6 @@ JAZZMIN_SETTINGS = {
 }
 
 # -----------------------------
-# 🔢 DEFAULT AUTO FIELD
+#  DEFAULT AUTO FIELD
 # -----------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
