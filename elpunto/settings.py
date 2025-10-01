@@ -1,34 +1,45 @@
 """
 Django settings for elpunto project.
-Configuración flexible: local (SQLite) o Render (PostgreSQL + Cloudinary)
+
+Configuración flexible: funciona tanto en local (SQLite) como en Render (PostgreSQL + Cloudinary).
 """
 
 import os
 from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
+
+# Cargar variables del archivo .env
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ===============================
+# -----------------------------
+# 🔧 BANDERA GLOBAL
+# -----------------------------
+RENDER = os.environ.get("RENDER", "").lower() == "true"
+
+# -----------------------------
 # 🔐 SECRET KEY
-# ===============================
+# -----------------------------
 SECRET_KEY = os.environ.get(
-    "SECRET_KEY", "django-insecure-8+r8y2dpr)9*x(*j(0tm_+mps4%z*mffa&_^2w5i_!38txzu$u"
+    "SECRET_KEY",
+    "django-insecure-8+r8y2dpr)9*x(*j(0tm_+mps4%z*mffa&_^2w5i_!38txzu$u"
 )
 
-# ===============================
-# ⚙️ DEBUG
-# ===============================
+# -----------------------------
+# ⚙️ DEBUG MODE
+# -----------------------------
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
-# ===============================
+# -----------------------------
 # 🌐 HOSTS
-# ===============================
+# -----------------------------
 ALLOWED_HOSTS = ["*"]
 
-# ===============================
-# 🤝 CORS
-# ===============================
+# -----------------------------
+# 🤝 CORS CONFIG
+# -----------------------------
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
@@ -39,39 +50,34 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 
-# ===============================
+# -----------------------------
 # 🧩 APPS
-# ===============================
+# -----------------------------
 INSTALLED_APPS = [
-    # Admin UI
     "jazzmin",
-
-    # Core
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    # Translations
     "modeltranslation",
 
-    # Third-party
+    # 3rd-party
     "rest_framework",
     "corsheaders",
     "cloudinary",
     "cloudinary_storage",
 
-    # Local apps
+    # Local app
     "task",
 ]
 
-# ===============================
+# -----------------------------
 # ⚙️ MIDDLEWARE
-# ===============================
+# -----------------------------
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",       # 👈 Importante que esté antes
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -85,9 +91,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "elpunto.urls"
 
-# ===============================
+# -----------------------------
 # 🧱 TEMPLATES
-# ===============================
+# -----------------------------
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -105,18 +111,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "elpunto.wsgi.application"
 
-# ===============================
-# 🗄️ DATABASE
-# ===============================
-RENDER = os.environ.get("RENDER", "False").lower() == "true"
-
+# -----------------------------
+# 🗄️ DATABASES
+# -----------------------------
 if RENDER:
-    # Render usa PostgreSQL
+    # 🔹 Render usa PostgreSQL (DATABASE_URL del panel Render)
     DATABASES = {
         "default": dj_database_url.config(conn_max_age=600)
     }
 else:
-    # Local usa SQLite
+    # 🔹 Local usa SQLite
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -124,9 +128,9 @@ else:
         }
     }
 
-# ===============================
+# -----------------------------
 # 🔑 AUTH
-# ===============================
+# -----------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -134,9 +138,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# ===============================
+# -----------------------------
 # 🌍 I18N
-# ===============================
+# -----------------------------
 LANGUAGE_CODE = "es"
 
 LANGUAGES = [
@@ -149,18 +153,18 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# ===============================
+# -----------------------------
 # 🧱 STATIC FILES
-# ===============================
+# -----------------------------
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# ===============================
-# 🖼️ MEDIA (Cloudinary / Local)
-# ===============================
+# -----------------------------
+# 🖼️ MEDIA FILES (Cloudinary)
+# -----------------------------
 if RENDER:
-    # Render → Cloudinary
+    # 🔹 Cloudinary para Render
     CLOUDINARY_STORAGE = {
         "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
         "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
@@ -168,28 +172,30 @@ if RENDER:
     }
     DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 else:
-    # Local → carpeta /media
+    # 🔹 Local guarda archivos en /media
     MEDIA_URL = "/media/"
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# ===============================
+# -----------------------------
 # ⚙️ DRF
-# ===============================
+# -----------------------------
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
 }
 
-# ===============================
+# -----------------------------
 # 🎨 JAZZMIN
-# ===============================
+# -----------------------------
 JAZZMIN_SETTINGS = {
     "site_title": "El Punto Bar",
     "site_header": "Panel de Administración",
     "welcome_sign": "Bienvenido al panel de El Punto Bar",
     "site_brand": "El Punto Bar",
+    "show_sidebar": True,
+    "navigation_expanded": True,
 }
 
-# ===============================
-# 🔢 AUTO FIELD
-# ===============================
+# -----------------------------
+# 🔢 DEFAULT AUTO FIELD
+# -----------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
