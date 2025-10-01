@@ -11,3 +11,5 @@ python-dotenv==1.1.1
 dj-database-url==3.0.1
 sqlparse==0.5.3
 tzdata==2025.2
+django-cloudinary-storage==0.3.0
+cloudinary==1.41.0
