@@ -1,44 +1,29 @@
-"""
-Django settings for elpunto project.
-
-Configuración flexible: funciona tanto en local (SQLite) como en Render (PostgreSQL + Cloudinary).
-"""
-
 import os
 from pathlib import Path
 import dj_database_url
-from dotenv import load_dotenv
-
-# Cargar variables del archivo .env
-load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# -----------------------------
-# 🔧 BANDERA GLOBAL
-# -----------------------------
-RENDER = os.environ.get("RENDER", "").lower() == "true"
 
 # -----------------------------
 # 🔐 SECRET KEY
 # -----------------------------
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
-    "django-insecure-8+r8y2dpr)9*x(*j(0tm_+mps4%z*mffa&_^2w5i_!38txzu$u"
+    "django-insecure-8+r8y2dpr)9*x(*j(0tm_+mps4%z*mffa&_^2w5i_!38txzu$u",
 )
 
 # -----------------------------
-# ⚙️ DEBUG MODE
+# ⚙️ DEBUG
 # -----------------------------
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
 # -----------------------------
-# 🌐 HOSTS
+# 🌐 ALLOWED HOSTS
 # -----------------------------
 ALLOWED_HOSTS = ["*"]
 
 # -----------------------------
-# 🤝 CORS CONFIG
+# 🔄 CORS
 # -----------------------------
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False
@@ -62,14 +47,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "modeltranslation",
-
-    # 3rd-party
     "rest_framework",
     "corsheaders",
-    "cloudinary",
-    "cloudinary_storage",
-
-    # Local app
     "task",
 ]
 
@@ -91,9 +70,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "elpunto.urls"
 
-# -----------------------------
-# 🧱 TEMPLATES
-# -----------------------------
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -112,15 +88,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "elpunto.wsgi.application"
 
 # -----------------------------
-# 🗄️ DATABASES
+# 🗄️ DATABASE
 # -----------------------------
-if RENDER:
-    # 🔹 Render usa PostgreSQL (DATABASE_URL del panel Render)
+if os.environ.get("RENDER", "").lower() == "true" and os.environ.get("DATABASE_URL"):
     DATABASES = {
         "default": dj_database_url.config(conn_max_age=600)
     }
 else:
-    # 🔹 Local usa SQLite
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -129,7 +103,27 @@ else:
     }
 
 # -----------------------------
-# 🔑 AUTH
+# 🌍 LANG
+# -----------------------------
+LANGUAGE_CODE = "es"
+LANGUAGES = [("es", "Español"), ("en", "English")]
+MODELTRANSLATION_FALLBACK_LANGUAGES = ("es",)
+TIME_ZONE = "UTC"
+USE_I18N = True
+USE_TZ = True
+
+# -----------------------------
+# 🧱 STATIC & MEDIA
+# -----------------------------
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# -----------------------------
+# 🔐 AUTH
 # -----------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -139,51 +133,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # -----------------------------
-# 🌍 I18N
-# -----------------------------
-LANGUAGE_CODE = "es"
-
-LANGUAGES = [
-    ("es", "Español"),
-    ("en", "English"),
-]
-
-MODELTRANSLATION_FALLBACK_LANGUAGES = ("es",)
-TIME_ZONE = "UTC"
-USE_I18N = True
-USE_TZ = True
-
-# -----------------------------
-# 🧱 STATIC FILES
-# -----------------------------
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-# -----------------------------
-# 🖼️ MEDIA FILES (Cloudinary)
-# -----------------------------
-if RENDER:
-    # 🔹 Cloudinary para Render
-    CLOUDINARY_STORAGE = {
-        "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
-        "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
-        "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
-    }
-    DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-else:
-    # 🔹 Local guarda archivos en /media
-    MEDIA_URL = "/media/"
-    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-# -----------------------------
-# ⚙️ DRF
-# -----------------------------
-REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
-}
-
-# -----------------------------
 # 🎨 JAZZMIN
 # -----------------------------
 JAZZMIN_SETTINGS = {
@@ -191,8 +140,6 @@ JAZZMIN_SETTINGS = {
     "site_header": "Panel de Administración",
     "welcome_sign": "Bienvenido al panel de El Punto Bar",
     "site_brand": "El Punto Bar",
-    "show_sidebar": True,
-    "navigation_expanded": True,
 }
 
 # -----------------------------
