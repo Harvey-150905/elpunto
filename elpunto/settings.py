@@ -9,6 +9,8 @@ Configuración lista para PythonAnywhere:
 
 import os
 from pathlib import Path
+import pymysql
+pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,7 +32,7 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "tuusuario.pythonanywhere.com",  # 👈 cámbialo por tu usuario real de PA
+    "axiomstudios.pythonanywhere.com",  # 👈 cámbialo por tu usuario real de PA
     "elpunto-frontend.vercel.app",
 ]
 
@@ -110,8 +112,16 @@ WSGI_APPLICATION = "elpunto.wsgi.application"
 # -----------------------------
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "AxiomStudios$default",  # 👈 tu nombre de base de datos exacto
+        "USER": "AxiomStudios",          # 👈 tu usuario de PythonAnywhere
+        "PASSWORD": "Alfredo1470x.",  # 👈 cámbiala por la tuya
+        "HOST": "AxiomStudios.mysql.pythonanywhere-services.com",
+        "PORT": "3306",
+        "OPTIONS": {
+            "charset": "utf8mb4",
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
